@@ -12,7 +12,7 @@ using Project.Core.Module.Implement;
 namespace Project.Core.Tests.Modules
 {
     [TestFixture]
-    class ProjectTests
+    class ProjectModuleTests
     {
         IProjectAdapter _projectAdapter = Substitute.For<IProjectAdapter>();
 

@@ -65,10 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\ProjectTests.cs" />
+    <Compile Include="Adapters\ProjectAdapterTests.cs" />
+    <Compile Include="Modules\ProjectModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
