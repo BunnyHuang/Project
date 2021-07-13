@@ -22,6 +22,7 @@ namespace Project.WebApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutofacConfig.Bootstrapper();
+            AutoMapperConfiguration.Configure();
 
             var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             formatter.SerializerSettings = new JsonSerializerSettings

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using AutoMapper;
 using Project.Core.Entities.Project;
 using Project.Core.Module;
+using Project.WebApi.Models;
 
 namespace Project.WebApi.Controllers
 {
     [RoutePrefix("Project")]
-    public class ProjectController : ApiController
+    public class ProjectController : ApiBaseController
     {
         IProjectModule _projectModule;
 
@@ -22,27 +24,30 @@ namespace Project.WebApi.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            return Ok(_projectModule.GetAll());
+            var all = Mapper.Map<List<ProjectViewModel>>(_projectModule.GetAll());
+            return Ok(all);
         }
 
         [Route("{projectId}")]
         [HttpGet]
         public IHttpActionResult Get(Guid projectId)
         {
-            return Ok(_projectModule.Get(projectId));
+            var model = Mapper.Map<ProjectViewModel>(_projectModule.Get(projectId));
+            return Ok(model);
         }
 
-        [Route("Insert")]
+        [Route("")]
         [HttpPost]
         public IHttpActionResult Insert(string projectName)
         {
             return Ok(_projectModule.Insert(projectName));
         }
 
-        [Route("Update")]
+        [Route("")]
         [HttpPut]
-        public IHttpActionResult Update(ProjectModel model)
+        public IHttpActionResult Update(ProjectViewModel vm)
         {
+            var model = Mapper.Map<ProjectModel>(vm);
             return Ok(_projectModule.Update(model));
         }
 
@@ -51,6 +56,13 @@ namespace Project.WebApi.Controllers
         public IHttpActionResult Delete(Guid projectId)
         {
             return Ok(_projectModule.Delete(projectId));
+        }
+
+        [Route("ExceptionTest")]
+        [HttpGet]
+        public IHttpActionResult ExceptionTest()
+        {
+            throw new Exception();
         }
     }
 }

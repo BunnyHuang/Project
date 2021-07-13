@@ -10,5 +10,7 @@ namespace Project.Core.Entities.Project
     {
         public Guid ProjectId { get; set; }
         public string ProjectName { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }
