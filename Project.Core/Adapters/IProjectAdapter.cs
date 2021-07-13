@@ -9,6 +9,10 @@ namespace Project.Core.Adapters
 {
     public interface IProjectAdapter
     {
-        List<ProjectModel> Get();
+        List<ProjectModel> GetAll();
+        ProjectModel Get(Guid projectId);
+        bool Insert(ProjectModel model);
+        bool Update(ProjectModel model);
+        bool Delete(Guid projectId);
     }
 }

@@ -9,6 +9,10 @@ namespace Project.Core.Module
 {
     public interface IProjectModule
     {
-        List<ProjectModel> Get();
+        List<ProjectModel> GetAll();
+        ProjectModel Get(Guid projectId);
+        bool Insert(string projectName);
+        bool Update(ProjectModel model);
+        bool Delete(Guid projectId);
     }
 }

@@ -25,8 +25,6 @@ namespace Project.Utility.DataAccess
         {
             using (var conn = new SqlConnection(connectionString))
             {
-                //return conn.Query<T>(" SELECT [PrejectId], [PrejectName] FROM[Project].[dbo].[ProjectTable] ",
-                //    commandParameters, commandType: CommandType.Text, commandTimeout: SQL_TIMEOUT_SEC);
                 return conn.Query<T>(commandText, commandParameters, commandType: CommandType.StoredProcedure, commandTimeout: SQL_TIMEOUT_SEC);
             }
         }

@@ -17,14 +17,60 @@ namespace Project.Core.Tests.Modules
         IProjectAdapter _projectAdapter = Substitute.For<IProjectAdapter>();
 
         [Test]
-        public void GetTest()
+        public void GetAllTest()
         {
-            _projectAdapter.Get().Returns(new List<ProjectModel>() { new ProjectModel() { ProjectId =Guid.NewGuid(), ProjectName = "Project1" } });
+            _projectAdapter.GetAll().Returns(new List<ProjectModel>() { new ProjectModel() { ProjectId =Guid.NewGuid(), ProjectName = "Project1" } });
 
             var module = new ProjectModule(_projectAdapter);
-            var result = module.Get();
+            var result = module.GetAll();
 
             Assert.IsTrue(result.Count > 0);
+        }
+
+        [Test]
+        public void GetTest()
+        {
+            _projectAdapter.Get(Arg.Any<Guid>()).Returns(new ProjectModel() { ProjectId = Guid.NewGuid(), ProjectName = "Project1" });
+
+            var module = new ProjectModule(_projectAdapter);
+            var result = module.Get(Guid.NewGuid());
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public void InsertTest()
+        {
+            _projectAdapter.Insert(Arg.Any<ProjectModel>()).Returns(true);
+
+            var module = new ProjectModule(_projectAdapter);
+            var result = module.Insert("insert test");
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void UpdateTest()
+        {
+            var model = new ProjectModel() { ProjectId = Guid.NewGuid(), ProjectName = "update test" };
+
+            _projectAdapter.Update(Arg.Any<ProjectModel>()).Returns(true);
+
+            var module = new ProjectModule(_projectAdapter);
+            var result = module.Update(model);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void DeleteTest()
+        {
+            _projectAdapter.Delete(Arg.Any<Guid>()).Returns(true);
+
+            var module = new ProjectModule(_projectAdapter);
+            var result = module.Delete(Guid.NewGuid());
+
+            Assert.IsTrue(result);
         }
     }
 }

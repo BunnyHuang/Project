@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Project.WebApi
 {
@@ -20,6 +22,13 @@ namespace Project.WebApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutofacConfig.Bootstrapper();
+
+            var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            formatter.SerializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
     }
 }
