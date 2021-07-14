@@ -51,6 +51,7 @@
     <Compile Include="Adapters\Implement\ProjectAdapter.cs" />
     <Compile Include="Adapters\IProjectAdapter.cs" />
     <Compile Include="Adapters\_base\StoreProcedures.cs" />
+    <Compile Include="Entities\Project\ProjectDto.cs" />
     <Compile Include="Entities\Project\ProjectModel.cs" />
     <Compile Include="Modules\Implement\ProjectModule.cs" />
     <Compile Include="Modules\IProjectModule.cs" />

@@ -28,6 +28,26 @@ namespace Project.Core.Adapters.Implement
                 parameters);
         }
 
+        public List<ProjectDto> GetWithMember(Guid projectId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ProjectId", projectId);
+
+            return DapperHelper.QueryCollection<ProjectDto>(AppConnectionString.Project,
+                StoreProcedures.Project.GetMemberByProjectId,
+                parameters).ToList();
+        }
+
+        public ProjectModel Get(string projectName)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@ProjectName", projectName);
+
+            return DapperHelper.Query<ProjectModel>(AppConnectionString.Project,
+                StoreProcedures.Project.GetByProjectName,
+                parameters);
+        }
+
         public bool Insert(ProjectModel model)
         {
             var parameters = new DynamicParameters();

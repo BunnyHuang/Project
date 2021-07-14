@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -38,8 +39,13 @@ namespace Project.WebApi.Controllers
 
         [Route("")]
         [HttpPost]
-        public IHttpActionResult Insert(string projectName)
+        public IHttpActionResult Insert([Required] string projectName)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             return Ok(_projectModule.Insert(projectName));
         }
 
@@ -47,14 +53,24 @@ namespace Project.WebApi.Controllers
         [HttpPut]
         public IHttpActionResult Update(ProjectViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var model = Mapper.Map<ProjectModel>(vm);
             return Ok(_projectModule.Update(model));
         }
 
         [Route("{projectId}")]
         [HttpDelete]
-        public IHttpActionResult Delete(Guid projectId)
+        public IHttpActionResult Delete([Required] Guid projectId)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             return Ok(_projectModule.Delete(projectId));
         }
 

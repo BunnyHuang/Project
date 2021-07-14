@@ -11,6 +11,8 @@ namespace Project.Core.Adapters
     {
         List<ProjectModel> GetAll();
         ProjectModel Get(Guid projectId);
+        List<ProjectDto> GetWithMember(Guid projectId);
+        ProjectModel Get(string projectName);
         bool Insert(ProjectModel model);
         bool Update(ProjectModel model);
         bool Delete(Guid projectId);

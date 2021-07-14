@@ -29,22 +29,36 @@ namespace Project.Core.Module.Implement
 
         public bool Insert(string projectName)
         {
+            if (_projectAdapter.Get(projectName) != null)
+            {
+                return false;
+            }
+
             var model = new ProjectModel()
             {
                 ProjectId = Guid.NewGuid(),
                 ProjectName = projectName
             };
-
             return _projectAdapter.Insert(model);
         }
 
         public bool Update(ProjectModel model)
         {
+            if (_projectAdapter.Get(model.ProjectId) == null)
+            {
+                return false;
+            }
+
             return _projectAdapter.Update(model);
         }
 
         public bool Delete(Guid projectId)
         {
+            if (_projectAdapter.GetWithMember(projectId) == null)
+            {
+                return false;
+            }
+
             return _projectAdapter.Delete(projectId);
         }
     }

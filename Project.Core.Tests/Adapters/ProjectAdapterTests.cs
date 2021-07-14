@@ -31,6 +31,33 @@ namespace Project.Core.Tests.Adapters
         }
 
         [Test]
+        public void GetWithMemberTest()
+        {
+            var adapter = new ProjectAdapter();
+            var result = adapter.GetWithMember(Guid.Parse("EDFF51C5-51C5-44C2-887C-09A433B586A7"));
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public void GetByProjectNameTest_ProjectName_Is_Exist()
+        {
+            var adapter = new ProjectAdapter();
+            var result = adapter.Get("Project1");
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public void GetByProjectNameTest_ProjectName_Is_Not_Exist()
+        {
+            var adapter = new ProjectAdapter();
+            var result = adapter.Get("Project2");
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
         public void InsertTest()
         {
             var model = new ProjectModel() { ProjectId = Guid.NewGuid(), ProjectName = "insert test" };
